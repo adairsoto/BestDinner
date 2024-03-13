@@ -13,7 +13,6 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<A
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IUserRepository _userRepository;
 
-
     public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
     {
         _jwtTokenGenerator = jwtTokenGenerator;
@@ -22,6 +21,8 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<A
     
     public async Task<ErrorOr<AuthenticationResult>> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
+        await Task.CompletedTask;
+
         if (_userRepository.GetUserByEmail(command.Email) is not null)
         {
             return Errors.User.DuplicateEmail;
